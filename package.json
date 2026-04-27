@@ -1,0 +1,25 @@
+{
+  "name": "careernode",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/priyanshu-debug/CareerNode#readme",
+  "bugs": {
+    "url": "https://github.com/priyanshu-debug/CareerNode/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyanshu-debug/CareerNode.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.5.0"
+  }
+}
