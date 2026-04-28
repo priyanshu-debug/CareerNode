@@ -1,7 +1,12 @@
 const express=require('express');
-const app=express();
-app.get('/',(req,res)=>{
-    res.end("Server Started Successfully");
-}).listen(3000,()=>{
-    console.log("server is running http://localhost:3000");
-})
+
+const app = express();
+const PORT = 5000;
+
+app.get('/', (req, res) => {
+    res.send("CareerNode Backend (API) is working!");
+});
+
+app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
+});
