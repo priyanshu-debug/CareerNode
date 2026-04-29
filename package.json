@@ -18,9 +18,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "ejs": "^5.0.2",
     "expo": "^55.0.17",
     "express": "^5.2.1",
-    "mongoose": "^9.5.0"
+    "mongoose": "^9.6.0"
   }
 }
