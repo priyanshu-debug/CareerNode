@@ -20,8 +20,7 @@ const PostJobScreen = ({ navigation }) => {
     description: ''
   });
 
-  // Backend API URL (Apne system ka IP yahan replace karein)
-  // Example: 'http://192.168.1.5:5000/api/jobs'
+  
   const API_URL = '192.168.2.118:5000/api/jobs';
 
   const handlePostJob = async () => {
