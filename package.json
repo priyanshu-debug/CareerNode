@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "ejs": "^5.0.2",
+    "expo": "^55.0.17",
     "express": "^5.2.1",
     "mongoose": "^9.5.0"
   }
