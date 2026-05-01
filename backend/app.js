@@ -64,5 +64,15 @@ app.post('/api/jobs', async (req, res) => {
     }
 });
 
+//jobs delete krne k liye 
+app.post('/delete-job/:id', async (req, res) => {
+    try {
+        await Job.findByIdAndDelete(req.params.id);
+        res.redirect('/dashboard');
+    } catch (error) {
+        res.status(500).send("Delete nahi ho paya");
+    }
+});
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/post-job`));

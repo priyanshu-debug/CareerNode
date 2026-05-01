@@ -10,6 +10,17 @@
 </head>
 <body>
     <h1>Available Jobs near you</h1>
+    <!-- dashboard.ejs ke top par, h1 ke niche -->
+<div style="background: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+    <form action="/dashboard" method="GET" style="display: flex; gap: 10px;">
+        <input type="text" name="search" placeholder="Search Job (e.g. Driver)" style="flex: 1; padding: 8px;">
+        <input type="text" name="location" placeholder="Location (e.g. Ghaziabad)" style="flex: 1; padding: 8px;">
+        <button type="submit" style="padding: 8px 20px; background: #e67e22; color: white; border: none; cursor: pointer;">
+            Search
+        </button>
+        <a href="/dashboard" style="text-decoration: none; padding: 8px; color: #666;">Reset</a>
+    </form>
+</div>
     <a href="/post-job">Post a New Job</a>
     <hr>
 
@@ -17,6 +28,15 @@
         <% jobs.forEach(job => { %>
             <div class="job-card">
                 <h3><%= job.title %></h3>
+
+                <h3><%= job.title %></h3>
+    
+    <!-- Delete Form -->
+    <form action="/delete-job/<%= job._id %>" method="POST" style="margin-top:10px;">
+        <button type="submit" style="background-color:red; color:white; border:none; padding:5px 10px; cursor:pointer;">
+            Delete Job
+        </button>
+    
                 <p><strong>Location:</strong> <%= job.location %></p>
                 <p class="wage">Wage: ₹<%= job.wage %></p>
                 <p><%= job.description %></p>
@@ -25,5 +45,7 @@
     <% } else { %>
         <p>No jobs available right now.</p>
     <% } %>
+
+   
 </body>
 </html>
