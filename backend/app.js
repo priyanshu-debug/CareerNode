@@ -35,10 +35,25 @@ app.get('/post-job', (req, res) => {
 
 app.get('/dashboard', async (req, res) => {
     try {
-        const allJobs = await Job.find().sort({ createdAt: -1 }); 
-        res.render('dashboard', { jobs: allJobs }); 
+        const { search, location } = req.query; // Browser se search query le rahe hain
+        let query = {}; // By default khali, matlab saari jobs
+
+        // Agar user ne Search bar mein kuch likha hai
+        if (search) {
+            query.title = { $regex: search, $options: 'i' }; // 'i' matlab case-insensitive (chhota-bada letter sab chalega)
+        }
+
+        // Agar user ne Location likhi hai
+        if (location) {
+            query.location = { $regex: location, $options: 'i' };
+        }
+
+        const filteredJobs = await Job.find(query).sort({ createdAt: -1 });
+        res.render('dashboard', { jobs: filteredJobs });
+
     } catch (error) {
-        res.status(500).send("Error fetching jobs");
+        console.error(error);
+        res.status(500).send("Search error");
     }
 });
 app.post('/api/jobs', async (req, res) => {
@@ -73,6 +88,7 @@ app.post('/delete-job/:id', async (req, res) => {
         res.status(500).send("Delete nahi ho paya");
     }
 });
+
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/post-job`));
