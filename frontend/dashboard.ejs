@@ -21,6 +21,7 @@
         <a href="/dashboard" style="text-decoration: none; padding: 8px; color: #666;">Reset</a>
     </form>
 </div>
+
     <a href="/post-job">Post a New Job</a>
     <hr>
 
@@ -28,6 +29,33 @@
         <% jobs.forEach(job => { %>
             <div class="job-card">
                 <h3><%= job.title %></h3>
+
+                    <div style="background: #e9ecef; padding: 10px; margin-top: 10px; border-radius: 5px;">
+        <p style="margin: 0 0 5px 0; font-size: 14px;">Interested in this job?</p>
+        <form action="/apply-job/<%= job._id %>" method="POST" style="display: flex; gap: 5px;">
+            <input type="text" name="seekerName" placeholder="Your Name" required style="padding: 5px; flex: 1;">
+            <input type="text" name="seekerPhone" placeholder="Phone No." required style="padding: 5px; flex: 1;">
+            <button type="submit" style="background-color: #27ae60; color: white; border: none; padding: 5px 15px; cursor: pointer;">
+                Apply
+            </button>
+        </form>
+    </div>
+
+    <!-- Job Card ke end mein -->
+<div style="margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
+    <strong>Applied Seekers:</strong>
+    <% if(job.applications && job.applications.length > 0) { %>
+        <ul style="list-style: none; padding: 0;">
+            <% job.applications.forEach(app => { %>
+                <li style="font-size: 13px; background: #fffde7; margin-bottom: 5px; padding: 5px;">
+                    👤 <%= app.name %> - 📞 <%= app.phone %>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p style="font-size: 12px; color: #888;">No applications yet.</p>
+    <% } %>
+</div>
     
     <!-- Delete Form -->
     <form action="/delete-job/<%= job._id %>" method="POST" style="margin-top:10px;">
@@ -43,6 +71,8 @@
     <% } else { %>
         <p>No jobs available right now.</p>
     <% } %>
+
+    
 
    
 </body>

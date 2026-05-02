@@ -23,6 +23,14 @@ mongoose.connect('mongodb://localhost:27017/careernode')
     wage: Number,
     location: String,
     description: String,
+    // Ek array banate hain seekers ki details store karne ke liye
+    applications: [
+        {
+            name: String,
+            phone: String,
+            appliedAt: { type: Date, default: Date.now }
+        }
+    ],
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -76,6 +84,25 @@ app.post('/api/jobs', async (req, res) => {
     } catch (error) {
         console.error("Save karne mein error:", error);
         res.status(500).send("Database mein save nahi hua");
+    }
+});
+
+
+app.post('/apply-job/:id', async (req, res) => {
+    try {
+        const jobId = req.params.id;
+        const { seekerName, seekerPhone } = req.body;
+
+        // MongoDB ka $push operator use karenge array mein data dalne ke liye
+        await Job.findByIdAndUpdate(jobId, {
+            $push: { applications: { name: seekerName, phone: seekerPhone } }
+        });
+
+        console.log(`New application for Job ID: ${jobId}`);
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Application fail ho gayi!");
     }
 });
 
